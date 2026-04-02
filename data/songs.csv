@@ -9,3 +9,20 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
 9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
 10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+11,International Love,Pitbull,pop,happy,0.88,130,0.82,0.91,0.05
+12,California Gurls,Katy Perry,pop,happy,0.85,120,0.88,0.87,0.04
+13,Viva La Vida,Coldplay,rock,intense,0.73,138,0.61,0.55,0.12
+14,Holding Out for a Hero,Bonnie Tyler,rock,intense,0.92,144,0.72,0.64,0.08
+15,Moskau,Dschinghis Khan,pop,happy,0.90,136,0.91,0.83,0.06
+16,Rasputin,Boney M,pop,happy,0.86,126,0.85,0.85,0.07
+17,Thunder in Your Heart,Little Barrie,rock,moody,0.78,112,0.54,0.62,0.14
+18,Hips Don't Lie,Shakira,latin,happy,0.87,100,0.89,0.91,0.11
+19,Lose Yourself,Eminem,hip-hop,intense,0.94,171,0.53,0.78,0.04
+20,Blinding Lights,The Weeknd,synthwave,moody,0.87,171,0.66,0.80,0.09
+21,Bohemian Rhapsody,Queen,rock,intense,0.85,144,0.62,0.52,0.18
+22,River Flows in You,Yiruma,classical,relaxed,0.18,68,0.78,0.22,0.97
+23,Uptown Funk,Mark Ronson,funk,happy,0.91,115,0.95,0.89,0.03
+24,Smells Like Teen Spirit,Nirvana,grunge,intense,0.92,116,0.44,0.65,0.08
+25,Despacito,Luis Fonsi,latin,relaxed,0.65,89,0.83,0.77,0.31
+26,Lose Control,Missy Elliott,hip-hop,happy,0.83,102,0.87,0.90,0.06
+27,No Woman No Cry,Bob Marley,reggae,relaxed,0.45,75,0.80,0.48,0.72

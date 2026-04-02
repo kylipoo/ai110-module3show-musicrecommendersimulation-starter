@@ -50,9 +50,19 @@ def load_songs(csv_path: str) -> List[Dict]:
     Loads songs from a CSV file.
     Required by src/main.py
     """
-    # TODO: Implement CSV loading logic
+    import csv
     print(f"Loading songs from {csv_path}...")
-    return []
+    float_fields = {"energy", "tempo_bpm", "valence", "danceability", "acousticness"}
+    songs = []
+    with open(csv_path, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            row["id"] = int(row["id"])
+            for field in float_fields:
+                row[field] = float(row[field])
+            songs.append(row)
+    print(len(songs), "songs loaded.")
+    return songs
 
 def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tuple[Dict, float, str]]:
     """
