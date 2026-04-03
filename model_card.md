@@ -158,11 +158,11 @@ A few sentences about what you learned:
 - How did building this change how you think about real music recommenders
 - Where do you think human judgment still matters, even if the model seems "smart"
 
-```
+
 
 Building this system revealed how every weight/score is a trade-off — boosting energy matching means a song with the perfect vibe but the "wrong" genre can outrank something that's a much better fit on paper. That tension made me realize how much a real music recommender has to balance, and how those decisions are never neutral.
 
 It also changed how I think about the scope of the problem. Music taste isn't static — genres like K-pop and video game OSTs have exploded in popularity and carry cultural context that a set of numeric attributes can't capture. A system built today on today's catalog will drift out of alignment with listeners faster than the weights can be retuned.
 
 That's where human judgment still matters most. A score derived from energy, tempo_bpm, and valence can tell you a song is similar on the surface, but it can't tell you that a track feels like a rainy afternoon, or that it's the one song from a game that defined someone's childhood. Firsthand listening — and the editorial instinct that comes with it — carries meaning that no feature vector can fully represent.
-```
+
