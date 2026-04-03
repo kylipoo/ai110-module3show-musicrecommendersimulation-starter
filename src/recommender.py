@@ -88,22 +88,22 @@ def score_song(song: Dict, user_prefs: Dict) -> Tuple[float, str]:
         acoustic_score = 1.0 - song["acousticness"]
 
     # Original weights: genre=0.40, mood=0.25, energy=0.20, tempo=0.10, acousticness=0.05
-    # score = (
-    #     0.40 * genre_score +
-    #     0.25 * mood_score  +
-    #     0.20 * energy_score +
-    #     0.10 * tempo_score +
-    #     0.05 * acoustic_score
-    # )
-
-    # Energy-sensitive weights: genre halved (0.20), energy doubled (0.40)
     score = (
-        0.20 * genre_score +
+        0.40 * genre_score +
         0.25 * mood_score  +
-        0.40 * energy_score +
+        0.20 * energy_score +
         0.10 * tempo_score +
         0.05 * acoustic_score
     )
+
+    # Energy-sensitive weights: genre halved (0.20), energy doubled (0.40)
+    # score = (
+    #     0.20 * genre_score +
+    #     0.25 * mood_score  +
+    #     0.40 * energy_score +
+    #     0.10 * tempo_score +
+    #     0.05 * acoustic_score
+    # )
 
     reasons = []
     if genre_score == 1.0:
