@@ -96,8 +96,8 @@ Some prompts:
 ---
 
 - Genre and mood matches are an all-or-nothing match (either 1.0 or 0.0). So a song that's "jazz" when you want "blues" would score identical to a song in a totally unrelated genre. This ignores real inspirations that genres could have taken from each other.
-- Placing too much stock in energy in my experiment of changing weights means that unrelated results get scored higher.
-- Will require very precise preferences. For example, conflicting profiles with intense mood/high energy and being in the lo-fi genre will choose results where the mood always scores 0. The system has no fallback, it just returns songs with the closest energy.
+- Although when I doubled the weight given to energy for the experiment it had the benefit of being able to ignore genre lines and recommend a wider range of songs..
+  - It will require very precise preferences. For example, conflicting profiles with intense mood/high energy and being in the lo-fi genre will choose results where the mood always scores 0. The system has no fallback, it just returns songs with the closest energy. 
 - Certain genres, moods or energy are sparse in the data-set, so users with preferences like reggae or classic might get worse recommendations.
 
 ## 7. Evaluation
