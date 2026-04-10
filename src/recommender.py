@@ -110,16 +110,33 @@ def score_song(song: Dict, user_prefs: Dict) -> Tuple[float, str]:
     # )
 
     reasons = []
+
     if genre_score == 1.0:
-        reasons.append(f"matches your favorite genre ({song['genre']})")
+        reasons.append(f"genre matches ({song['genre']})")
+    else:
+        reasons.append(f"genre doesn't match (it's {song['genre']}, you want {user_prefs['favorite_genre']})")
+
     if mood_score == 1.0:
-        reasons.append(f"fits your preferred mood ({song['mood']})")
-    if energy_score >= 0.85:
-        reasons.append("energy closely matches your target")
-    if tempo_score >= 0.85:
-        reasons.append("tempo closely matches your target")
-    if not reasons:
-        reasons.append("partial match on energy, tempo, and acousticness")
+        reasons.append(f"mood matches ({song['mood']})")
+    else:
+        reasons.append(f"mood doesn't match (it's {song['mood']}, you want {user_prefs['favorite_mood']})")
+
+    if energy_score >= 0.90:
+        reasons.append(f"energy closely matches your target ({song['energy']} vs {user_prefs['target_energy']})")
+    elif energy_score >= 0.70:
+        reasons.append(f"energy is close but not exact ({song['energy']} vs target {user_prefs['target_energy']})")
+    else:
+        reasons.append(f"energy is far from your target ({song['energy']} vs {user_prefs['target_energy']})")
+
+    if tempo_score >= 0.90:
+        reasons.append(f"tempo closely matches ({song['tempo_bpm']} BPM vs target {user_prefs['target_tempo']})")
+    elif tempo_score < 0.70:
+        reasons.append(f"tempo is off ({song['tempo_bpm']} BPM vs target {user_prefs['target_tempo']})")
+
+    if not user_prefs["likes_acoustic"] and song["acousticness"] > 0.5:
+        reasons.append(f"more acoustic than you prefer (acousticness {song['acousticness']})")
+    elif user_prefs["likes_acoustic"] and song["acousticness"] < 0.3:
+        reasons.append(f"less acoustic than you prefer (acousticness {song['acousticness']})")
 
     explanation = "Because it " + ", and ".join(reasons) + "."
     return round(score, 4), explanation

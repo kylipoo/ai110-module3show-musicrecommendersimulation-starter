@@ -116,28 +116,28 @@ You do not need a numeric metric, but if you used one, explain what it measures.
 
 - I added multiple user profiles with differing genre preferences and went through each one seeing if the calculated results matched my expectations.
 - **High-Energy Pop vs Chill Lofi:** The Pop profile targets energy 0.90 with non-acoustic pop songs in a happy mood,
-  - **High-Energy Pop**:![alt text](<Screenshot 2026-04-03 at 11.10.45 AM.jpg>)
+  - **High-Energy Pop**: ![alt text](<Screenshot 2026-04-10 at 12.05.40 PM.jpg>)
   - Example for high-energy pop calculations:
     - ![alt text](<Screenshot 2026-04-03 at 11.16.33 AM.jpg>)
 
 - **Deep Intense Rock:** Deep Intense Rock wants a target energy of 0.92 and doesn't like acoustic. It sounds similar to High energy pop, but what really makes the difference in what songs were selected was the genre attribute.
-  - **Deep Intense Rock**: ![alt text](<Screenshot 2026-04-03 at 11.10.56 AM.jpg>)
+  - **Deep Intense Rock**: ![alt text](<Screenshot 2026-04-10 at 12.05.50 PM.jpg>)
   - Example for deep intense rock calculations:
     - ![alt text](<Screenshot 2026-04-10 at 10.06.46 AM.jpg>)
 
 - **Chill Lofi** Lo-fi was a genre that I didn't give as much focus on adding songs, but it the point here was to show that even if there aren't enough songs in the database that the system will work to look at other attributes such as mood, energy and tempo.
-  - **Chill Lofi**: ![alt text](<Screenshot 2026-04-03 at 11.10.51 AM.jpg>)
+  - **Chill Lofi**:![alt text](<Screenshot 2026-04-10 at 12.05.46 PM.jpg>)
   - Example for chill lofi calculations:
     - ![alt text](<Screenshot 2026-04-10 at 10.16.53 AM.jpg>)
 
 - **Lofi Rager (with comparison to deep intense rock):** Lo-fi rager targets high energy (~0.90+) and prefers non-acoustic. On paper it sounds like rock songs would probably get a lot of attention. Rock gets excellent results because the catalog has many intense rock songs that match all its attributes. The Lofi Rager, despite having the same energy target, gets poor results because fundamentally it's impossible to have a song that's high energy but also Lo-fi, as one of them is known for being intense and loud while Lo-fi is more something you can listen to while doing something else and not have it disrupt your activity. Additionally, I would also like to bring to mind that when I shifted the weights to be more forcused on energy
-  - **Deep Intense Rock**: ![alt text](<Screenshot 2026-04-03 at 11.10.56 AM.jpg>)
-  - **Lofi Rager**: ![alt text](<Screenshot 2026-04-03 at 11.22.03 AM.jpg>)
+  - **Deep Intense Rock**: ![alt text](<Screenshot 2026-04-10 at 12.05.50 PM-1.jpg>)
+  - **Lofi Rager**: ![alt text](<Screenshot 2026-04-10 at 12.06.01 PM.jpg>)
   - Example for lofi rager calculations:
     - ![alt text](<Screenshot 2026-04-10 at 10.24.46 AM.jpg>)
   - In addition, it's worth noting that when I had changed the weight to be more focused on energy, my search results changed. Previously, the algorithm would try to at least search for songs matching the lofi genre but now since genre is less important, it will look for more rock songs like Bohemian Rhapsody.
     - **Lofi Rager after changes**:
-      - ![alt text](<Screenshot 2026-04-03 at 11.22.03 AM-1.jpg>)
+      - ![alt text](<Screenshot 2026-04-10 at 12.10.25 PM.jpg>)
 
 ## 8. Future Work
 
