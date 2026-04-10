@@ -76,11 +76,11 @@ You can think about:
 
 ---
 
-The recommender works best when a user's preferences are clear and consistent — particularly when their favorite genre, mood, and energy level all point in the same direction. The High-Energy Pop profile is a good example: songs like Moskau and Rasputin scored near-perfectly because they matched on every dimension at once, and the results felt intuitive.
+The top results worked best for the user profiles "High-energy pop" and "Deep intense rock", delivering results that came the closest to being a 1-1 match with what each profile wanted. So from what can be found here, having clear and consistent preferences that point in the same direction delivers the best results, which is indeed what's expected from a recommender.
 
 It also handles energy-first listeners well. After reweighting energy to 40%, a user who cares most about how a song _feels_ (high-drive, fast-paced) will surface strong matches even across genre lines — Storm Runner or Gym Hero appearing near the top for an energetic profile makes sense even if the genre isn't an exact fit.
 
-The scoring is also fully transparent. Every score can be broken down into its five components, and the explanation text tells the user exactly why a song was recommended. There are no hidden factors or black-box behavior — a teacher or student can trace any result back to the math.
+The scoring is fully transparent. Every score can be broken down into its five components, and the explanation text tells the user exactly why a song was recommended based on what attributes matched. There are no hidden factors or black-box behavior — a teacher or student can trace any result back to the math.
 
 ## 6. Limitations and Bias
 
@@ -96,8 +96,8 @@ Some prompts:
 ---
 
 - Genre and mood matches are an all-or-nothing match (either 1.0 or 0.0). So a song that's "jazz" when you want "blues" would score identical to a song in a totally unrelated genre. This ignores real inspirations that genres could have taken from each other.
-- Although when I doubled the weight given to energy for the experiment it had the benefit of being able to ignore genre lines and recommend a wider range of songs..
-  - It will require very precise preferences. For example, conflicting profiles with intense mood/high energy and being in the lo-fi genre will choose results where the mood always scores 0. The system has no fallback, it just returns songs with the closest energy. 
+- Although when I doubled the weight given to energy for the experiment it had the benefit of being able to ignore genre lines and recommend a wider range of songs.
+  - It will require very precise preferences. For example, conflicting profiles with intense mood/high energy and being in the lo-fi genre will choose results where the mood always scores 0. The system has no fallback, it just returns songs with the closest energy.
 - Certain genres, moods or energy are sparse in the data-set, so users with preferences like reggae or classic might get worse recommendations.
 
 ## 7. Evaluation
@@ -115,25 +115,29 @@ You do not need a numeric metric, but if you used one, explain what it measures.
 ---
 
 - I added multiple user profiles with differing genre preferences and went through each one seeing if the calculated results matched my expectations.
-- **High-Energy Pop vs Chill Lofi:** These two profiles are complete opposites. The Pop profile targets energy 0.90 with non-acoustic pop songs in a happy mood, while Chill Lofi targets energy 0.35 with acoustic lofi tracks in a chill mood. The outputs reflected this cleanly — Pop surfaced high-tempo, electric tracks while Lofi returned quiet, acoustic songs like "Library Rain" and "Midnight Coding." The contrast makes sense because every attribute (energy, genre, mood, acousticness) points in opposite directions.
+- **High-Energy Pop vs Chill Lofi:** The Pop profile targets energy 0.90 with non-acoustic pop songs in a happy mood,
   - **High-Energy Pop**:![alt text](<Screenshot 2026-04-03 at 11.10.45 AM.jpg>)
-  - **Chill Lofi**: ![alt text](<Screenshot 2026-04-03 at 11.10.51 AM.jpg>)
+  - Example for high-energy pop calculations:
+    - ![alt text](<Screenshot 2026-04-03 at 11.16.33 AM.jpg>)
 
-- **High-Energy Pop vs Deep Intense Rock:** Both profiles want high energy (0.90 vs 0.92) and neither likes acoustic. The one thing making the lists produce different results, however, is genre, which has the highest weight of 0.4. 
-  - **High-Energy Pop**: ![alt text](<Screenshot 2026-04-03 at 11.10.45 AM.jpg>)
+- **Deep Intense Rock:** Deep Intense Rock wants a target energy of 0.92 and doesn't like acoustic. It sounds similar to High energy pop, but what really makes the difference in what songs were selected was the genre attribute.
   - **Deep Intense Rock**: ![alt text](<Screenshot 2026-04-03 at 11.10.56 AM.jpg>)
+  - Example for deep intense rock calculations:
+    - ![alt text](<Screenshot 2026-04-10 at 10.06.46 AM.jpg>)
 
-
-- **Chill Lofi vs Lofi Rager:** Both want lofi, but the Lofi Rager wants intense mood and 0.90 energy — which no lofi song in the catalog actually has. Every lofi track is chill or focused at low energy (~0.35–0.42), so the Lofi Rager\'s mood score is always 0. The system falls back on energy proximity alone, returning the same lofi songs as the Chill Lofi profile but ranked differently. The outputs look similar on the surface but for completely different (and broken) reasons.
+- **Chill Lofi** Lo-fi was a genre that I didn't give as much focus on adding songs, but it the point here was to show that even if there aren't enough songs in the database that the system will work to look at other attributes such as mood, energy and tempo.
   - **Chill Lofi**: ![alt text](<Screenshot 2026-04-03 at 11.10.51 AM.jpg>)
-  - **Lofi Rager**: ![alt text](<Screenshot 2026-04-03 at 11.22.03 AM.jpg>)
+  - Example for chill lofi calculations:
+    - ![alt text](<Screenshot 2026-04-10 at 10.16.53 AM.jpg>)
 
-- **Deep Intense Rock vs Lofi Rager:** Both target high energy (~0.90+) and non-acoustic. Rock gets excellent results because the catalog has many intense rock songs that match all its attributes. The Lofi Rager, despite having the same energy target, gets poor results because there are no high-energy lofi songs: It is a paradox because Lofi tends to be low-energy. This pair best shows how catalog coverage — not just the scoring formula — determines whether a profile gets useful recommendations.
+- **Lofi Rager (with comparison to deep intense rock):** Lo-fi rager targets high energy (~0.90+) and prefers non-acoustic. On paper it sounds like rock songs would probably get a lot of attention. Rock gets excellent results because the catalog has many intense rock songs that match all its attributes. The Lofi Rager, despite having the same energy target, gets poor results because fundamentally it's impossible to have a song that's high energy but also Lo-fi, as one of them is known for being intense and loud while Lo-fi is more something you can listen to while doing something else and not have it disrupt your activity. Additionally, I would also like to bring to mind that when I shifted the weights to be more forcused on energy
   - **Deep Intense Rock**: ![alt text](<Screenshot 2026-04-03 at 11.10.56 AM.jpg>)
   - **Lofi Rager**: ![alt text](<Screenshot 2026-04-03 at 11.22.03 AM.jpg>)
-
-- Example for high-energy pop calculations:
-- ![alt text](<Screenshot 2026-04-03 at 11.16.33 AM.jpg>)
+  - Example for lofi rager calculations:
+    - ![alt text](<Screenshot 2026-04-10 at 10.24.46 AM.jpg>)
+  - In addition, it's worth noting that when I had changed the weight to be more focused on energy, my search results changed. Previously, the algorithm would try to at least search for songs matching the lofi genre but now since genre is less important, it will look for more rock songs like Bohemian Rhapsody.
+    - **Lofi Rager after changes**:
+      - ![alt text](<Screenshot 2026-04-03 at 11.22.03 AM-1.jpg>)
 
 ## 8. Future Work
 
@@ -149,6 +153,8 @@ Examples:
 
 - I would add more diverse genres and balance the current selection out.
 - I would add more attributes like what kind of instruments are being used, the volume, if the song contains any mature themes.
+- I actually plan on making this project the subject of the final project where I need to implement RAG.
+  - A meaningful extension would be to augment the numeric scoring with a RAG layer that retrieves text-based context about each song — artist interviews, critical reviews, lyric analysis, or cultural background — and uses a language model to reason over that context alongside the numeric match. This would let the system distinguish songs that are numerically identical but emotionally different, and surface recommendations based on meaning rather than just measurement. For example, two songs at 140 BPM with energy 0.92 might score identically today, but one was written as a celebration another as a breakdown. This is based on personal experience, I saw a video once pointing out two songs had the same key (tonal center/musical scale) yet one of them was from the Minecraft movie and was light hearted and talking about lava chicken, the other was from death note and it was meant to display the crashout and mental decay of the protagonist.
 
 ## 9. Personal Reflection
 
@@ -158,11 +164,10 @@ A few sentences about what you learned:
 - How did building this change how you think about real music recommenders
 - Where do you think human judgment still matters, even if the model seems "smart"
 
+I was surprised that even features most don't think about when they listen to a song, like tempo can be important, as that was one of the recommendations Claude gave to make song scoring more accurate.
 
+Building this system showed me that every weight is a value judgment in disguise. When I doubled the energy weight from 0.20 to 0.40, the entire ranking shifted — not because the songs changed, but because I changed what the system was willing to prioritize. Those decisions look like math, but they're not neutral.
 
-Building this system revealed how every weight/score is a trade-off — boosting energy matching means a song with the perfect vibe but the "wrong" genre can outrank something that's a much better fit on paper. That tension made me realize how much a real music recommender has to balance, and how those decisions are never neutral.
+It also changed how I think about the scope of the problem. Music taste isn't static — new genres like techno, K-Pop have exploded in popularity and carry cultural context that a set of numeric attributes can't capture. A system built today on today's catalog will drift out of alignment with listeners faster than the weights can be retuned.
 
-It also changed how I think about the scope of the problem. Music taste isn't static — genres like K-pop and video game OSTs have exploded in popularity and carry cultural context that a set of numeric attributes can't capture. A system built today on today's catalog will drift out of alignment with listeners faster than the weights can be retuned.
-
-That's where human judgment still matters most. A score derived from energy, tempo_bpm, and valence can tell you a song is similar on the surface, but it can't tell you that a track feels like a rainy afternoon, or that it's the one song from a game that defined someone's childhood. Firsthand listening — and the editorial instinct that comes with it — carries meaning that no feature vector can fully represent.
-
+That drift points to where human judgment stays irreplaceable. A score can tell you two songs share the same energy and BPM, but it can't tell you one feels like a rainy afternoon, or that the other is the song from a video game that defined someone's childhood. Numbers describe a song's surface; what makes a song matter lives somewhere no feature vector can reach.

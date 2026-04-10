@@ -78,8 +78,12 @@ def score_song(song: Dict, user_prefs: Dict) -> Tuple[float, str]:
     genre_score = 1.0 if song["genre"] == user_prefs["favorite_genre"] else 0.0
     mood_score  = 1.0 if song["mood"]  == user_prefs["favorite_mood"]  else 0.0
 
+# These scores are converted in such a way that can be scaled [0, 1]
+
+# Energy proximity is calculated as a linear decay from 1.0 at perfect match to 0.0 at 1.0 difference
     energy_score = max(0.0, 1.0 - abs(song["energy"] - user_prefs["target_energy"]))
 
+# Tempo proximity is calculated as a linear decay from 1.0 at perfect match to 0.0 at 200 BPM difference
     tempo_score = max(0.0, 1.0 - abs(song["tempo_bpm"] - user_prefs["target_tempo"]) / 200.0)
 
     if user_prefs["likes_acoustic"]:
